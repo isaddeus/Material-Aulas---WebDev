@@ -93,19 +93,19 @@ function executarMap() {
 
  function executarMapHTML() {
     const dispositivos = ['🎮', '🕹️', '💻'];
-    const resultado = 'Resultado da operação map inserindo HTML';
+    const resultado = 'LAALALALA';
     document.getElementById('resultado-map-html').innerHTML = resultado.join('<br>');
   }
 
 function executarFilter() {
   const array = ['🍎', '🍌', '🍇'];
-  const resultado = 'Resultado da operação filter';
+  const resultado = array.filter(pegaItem => pegaItem === "🍎");
   document.getElementById('resultado-filter').textContent = resultado;
 }
 
 function executarFind() {
   const array =  ['🍎', '🍌', '🍇'];
-  const resultado = 'Resultado da operação find';
+  const resultado = array.find(pegaItem => pegaItem === "🍎");
   document.getElementById('resultado-find').textContent = resultado;
 }
 
@@ -117,7 +117,9 @@ function executarFindIndex() {
 
 function executarReduce() {
   const array = [1, 2, 3, 4];
-  const resultado = 'Resultado da operação reduce';
+  const resultado = array.reduce((totalAcumulado, valorAtual)=>{
+    return totalAcumulado + valorAtual
+  },0); // ,0 indica o valor inicial dele
   document.getElementById('resultado-reduce').textContent = resultado;
 }
 
