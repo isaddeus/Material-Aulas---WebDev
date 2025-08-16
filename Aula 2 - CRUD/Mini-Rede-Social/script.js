@@ -42,7 +42,7 @@ window.onload = function(){
     mostrarPosts();
 
     // aqui, adicionamos o event listener pra receber o envio do formulario no CREATE
-    document.querySelector("#postForm").addEventListener("submit", addPost)
+    document.querySelector("#postForm").addEventListener("submit", addPost) // POR QUE 'querySelector'? getElementById é mais antigo e só funciona com ID, enquanto querySelector é mais moderno e versátil, funcionando com qualquer seletor CSS.
 } 
 
 // ---------- CREATE ----------
@@ -60,10 +60,17 @@ function addPost(infosDoEvento){
         text: textoPost,
         category: categoriaPost,
         image: imagemPost,
-        date: new Date().toLocaleString() // NEW: Cria um novo objeto do tipo date ||| toLocaleString: Localiza de onde voce ta postando e deixa no formato regional 
+        date: new Date().toLocaleString() 
+
+        // NEW: O operador 'new' é usado para criar uma nova instância de um objeto. 
+        // Aqui, estamos criando um novo objeto do tipo 'Date', que representa a data e hora atuais no momento em que o código é executado.
+
+        // toLocaleString: Este método converte a data e hora para uma string no formato local do usuário. 
+        // Isso significa que ele ajusta o formato de exibição (como dia/mês/ano ou mês/dia/ano) e o horário (AM/PM ou 24 horas) 
+        // com base nas configurações de idioma e região
     }
 
-    posts.unshift(novoPost) // UNSHIFT: Adiciona no começo do código
+    posts.unshift(novoPost) // UNSHIFT: Adiciona o novo post no inicio do array
 
     mostrarPosts()
 }
@@ -74,10 +81,10 @@ function mostrarPosts(){
 // PASSO A PASSO: 
 
     // 1- Pegar o elemento onde os tweets serão inseridos
-    const listaPosts = document.querySelector("#postlist") // FUNCIONA COM BASE NOS SELETORES DO CSS ( . // #....)
-    listaPosts.innerHTML = ""
+    const listaPosts = document.querySelector("#postList") // FUNCIONA COM BASE NOS PRFEFIXOS DO CSS (# = ID, . = CLASS, etc)
+    listaPosts.innerHTML = "";
 
-    // 2- Percorrer o array pegando as informações, criando um tweet com cada uma delas
+    // 2- Percorrer o array (meio que uma lista do python ) pegando as informações, criando um tweet com cada uma delas
     posts.forEach( pegaItem => {
         const cardPost = document.createElement("div")
         cardPost.classList.add("card")
