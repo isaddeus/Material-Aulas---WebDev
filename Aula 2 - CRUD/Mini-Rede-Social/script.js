@@ -34,7 +34,7 @@ let posts = [
 // console.log(pessoa[idade])
 
 
-// ------ ---------- CRUD -----------------------------
+// ---------------- CRUD --------------------
 
 // Ao carregar a pagina, executa as linhas abaixo:
 

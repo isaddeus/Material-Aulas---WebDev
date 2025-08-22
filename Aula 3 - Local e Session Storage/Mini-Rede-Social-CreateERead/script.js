@@ -24,15 +24,28 @@ let posts = [
 window.onload = function() {
     displayPosts();
 
-    document.getElementById('postForm').addEventListener('submit', addPost); 
-};
+    document.querySelector('#postForm').addEventListener('submit', addPost); 
+    document.querySelector('#postList').addEventListener('click', handleClick);
+}
+
+function handleClick(infosDoEvento){
+    const action = infosDoEvento.target.dataset.action; 
+    const index= infosDoEvento.target.dataset.index; 
+
+    if(action === "Editar"){
+        editarPost(index);
+    }
+    else if(action === "Apagar"){
+        apagarPost(index);
+    }
+}
 
 // Função para exibir os posts
 function displayPosts() {
     const postList = document.getElementById('postList');
     postList.innerHTML = '';
 
-    posts.forEach(pegaPost => {
+    posts.forEach((pegaPost, index) => {
             const postElement = document.createElement('div');
             postElement.classList.add('card-post');
   
@@ -41,13 +54,16 @@ function displayPosts() {
                 ${pegaPost.image ? `<img src="${pegaPost.image}" alt="Imagem do post" style="max-width:150px;">` : ""}
                 <p><em>Categoria: ${pegaPost.category}</em></p>
                 <p><em>Data e Hora: ${pegaPost.date}</em></p>
-                <button><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                <button><i class="fa-solid fa-eraser"></i> Apagar</button>
+                <button data-action="Editar" data-index="${index}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                <button data-action="Apagar" data-index="${index}><i class="fa-solid fa-eraser"></i> Apagar</button>
                 <hr style="margin:30px;">`;
                
             postList.append(postElement);
         });
 }
+
+
+// CREATE
 
 // Função para adicionar um novo post
 function addPost(event) {
@@ -67,7 +83,30 @@ function addPost(event) {
     
     posts.unshift(post);
     
-    document.getElementById('postForm').reset();
+    document.querySelector('#postForm').reset();
     
+    displayPosts();
+}
+
+// UPDATE
+
+function editarPost(index){
+    const novoTexto = prompt('Editar seu post');
+    posts[index].text = novoTexto;
+
+    displayPosts();
+}
+
+
+// DELETE
+
+function apagarPost(index){
+    const confirmar = confirm("Você deseja realmente excluir?")
+    posts.splice(index, 1);
+
+    if(confirmar){
+        posts.splice(index,1)
+    }
+
     displayPosts();
 }
